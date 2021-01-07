@@ -52,12 +52,6 @@ $file = "visitors.csv";
 
 if (file_exists($file)) {
   $csv = array_map('str_getcsv', file($file));
-  // array_walk($csv, function (&$arr) use ($csv) {
-  //     $arr = array_combine($csv[0], $arr);
-  // });
-  // array_shift($csv); # remove column header
-  // var_dump($csv);
-  // echo $csv[array_key_last($csv)][0];
   $id = intval($csv[array_key_last($csv)][0]) + 1;
 } else {
   $id = 1;
@@ -66,7 +60,7 @@ if (file_exists($file)) {
   fclose($fp);
 }
 
-echo "Pick option: \r\n 1 - Enter new visitor \r\n 2 - Edit visitor \r\n 3 - delete visitor";
+echo "Pick option: \r\n 1 - Enter new visitor \r\n 2 - Edit visitor \r\n 3 - delete visitor\r\n 4 - import external .csv";
 echo "\r\n\r\n";
 
 do {
@@ -100,7 +94,7 @@ switch ($a) {
     $fp = fopen($file, 'a');
 
     $date = date("Y-m-d H:i:s");
-    
+
     echo "\n\rEnterence time: " . $date . "\n\r";
 
     fputcsv($fp, array($id, $givenName, $email, $phone, $date));
@@ -230,6 +224,31 @@ switch ($a) {
         fclose($fout);
       }
     }
+    break;
+  case 4:
+    $new_csw = array();
+    $string = readline('Enter valid path to a new .csv file (ex.: C:\\\Users\\\Ignas\\\Desktop\\\visitors1.csv)  ');
+    $allowed =  array('csv');
+    $real_path = realpath($string);
+    echo $real_path;
+    $ext = pathinfo($real_path, PATHINFO_EXTENSION);
+    if (in_array($ext, $allowed)) {
+      echo "File IS ALLOWED";
+      if (file_exists($real_path)) {
+
+        echo "File exists";
+        $new_csw = array_map('str_getcsv', file($real_path));
+        $csv =  array_merge($csv, $new_csw); // C:\\Users\\Ignas\\Desktop\\visitors1.csv
+      }
+    }
+    print_r($csv);
+
+    $fout = fopen($file, 'w');
+    foreach ($csv as $line) {
+      fputcsv($fout, $line);
+    }
+    fclose($fout);
+    
     break;
 }
 
