@@ -10,6 +10,7 @@ Create an application for restaurants to have a list of customers - Visitors jou
 Application should be written in PHP and executed from CLI
 (https://www.php.net/manual/en/features.commandline.usage.php).
 Application should have the following fields:
+
 ● id
 ● name
 ● email
