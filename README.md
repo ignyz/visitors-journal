@@ -9,19 +9,20 @@ will be infected, restaurant would have to inform all possible contacts.
 Create an application for restaurants to have a list of customers - Visitors journal.
 Application should be written in PHP and executed from CLI
 (https://www.php.net/manual/en/features.commandline.usage.php).
-Application should have the following fields:
 
+Application should have the following fields:
 ● id
 ● name
 ● email
 ● phone
 ● date time
+
 Application should have the following functionality:
 ● Add visitor
 ● Edit visitor
 ● Delete visitor
+
 Bonus points if you:
 ● Don’t use any framework
 ● Do validations (valid email, phone number)
-● Add ability to import visitors in .csv format. Example of .csv file should be added to
-repository
+● Add ability to import visitors in .csv format. Example of .csv file should be added to repository
